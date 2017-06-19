@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IoCContainer.Host", "IoCContainer.Host\IoCContainer.Host.csproj", "{58FFE980-62A0-42AC-AE4C-9D7D191E0909}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IoCContainer", "IoCContainer\IoCContainer.csproj", "{64895D51-B0A3-4A6A-9F67-86A797828BAE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IoCContainer.Tests", "IoCContainer.Tests\IoCContainer.Tests.csproj", "{D277CEF7-DE6C-4412-BCB7-8632725897B8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{58FFE980-62A0-42AC-AE4C-9D7D191E0909}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58FFE980-62A0-42AC-AE4C-9D7D191E0909}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58FFE980-62A0-42AC-AE4C-9D7D191E0909}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58FFE980-62A0-42AC-AE4C-9D7D191E0909}.Release|Any CPU.Build.0 = Release|Any CPU
+		{64895D51-B0A3-4A6A-9F67-86A797828BAE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{64895D51-B0A3-4A6A-9F67-86A797828BAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{64895D51-B0A3-4A6A-9F67-86A797828BAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{64895D51-B0A3-4A6A-9F67-86A797828BAE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D277CEF7-DE6C-4412-BCB7-8632725897B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D277CEF7-DE6C-4412-BCB7-8632725897B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D277CEF7-DE6C-4412-BCB7-8632725897B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D277CEF7-DE6C-4412-BCB7-8632725897B8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
