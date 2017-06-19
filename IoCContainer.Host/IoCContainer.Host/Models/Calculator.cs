@@ -8,5 +8,6 @@ namespace IoCContainer.Host.Models
 {
     public class Calculator : ICalculator
     {
+
     }
 }
