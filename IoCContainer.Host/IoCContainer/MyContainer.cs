@@ -16,15 +16,28 @@ namespace IoCContainer
 
         public void Register<I, C>()
         {
+            Register<I, C>(LifecycleType.Transient);
+        }
+
+        public void Register<C>()
+        {
+            Register<C, C>();
+        }
+
+        public void Register<I, C>(LifecycleType lifecycleType)
+        {
             var interfaceType = typeof(I);
             var concreteType = typeof(C);
 
-            if (interfaceType == concreteType)
-                throw new ArgumentException("Invalid Arguments, use overload with single type");
             if (_container.Any(x => x.InterfaceType == typeof(I)))
                 throw new ObjectAlreadyRegisteredException($"Type {typeof(I)} has already been registered");
 
-            _container.Add(new RegisteredObject(interfaceType, concreteType, LifecycleType.Transient));
+            _container.Add(new RegisteredObject(interfaceType, concreteType, lifecycleType));
+        }
+
+        public void Resolve<T>()
+        {
+
         }
 
     }

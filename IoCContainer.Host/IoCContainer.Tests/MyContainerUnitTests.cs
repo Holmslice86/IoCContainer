@@ -8,33 +8,50 @@ namespace IoCContainer.Tests
 {
     public class MyContainerUnitTests
     {
-        [Fact]
-        public void Register_AcceptsTwoTypes_Successfully()
+        private MyContainer _myContainer;
+
+        public MyContainerUnitTests()
         {
-            RegisterWithContainer<ICalculator, Calculator>();
+            _myContainer = new MyContainer();
         }
 
         [Fact]
-        public void Register_SameTypeSameCall_ThrowsError()
+        public void Register_TwoTypes_Succeeds()
         {
-            Assert.Throws<ArgumentException>(() => RegisterWithContainer<Calculator, Calculator>());
+            _myContainer.Register<ICalculator, Calculator>();
+        }
+
+        [Fact]
+        public void Register_SameTypeSameCall_Succeeds()
+        {
+            _myContainer.Register<Calculator, Calculator>();
         }
 
         [Fact]
         public void Register_SameTypeSeperateCall_ThrowsError()
         {
-            var c = RegisterWithContainer<ICalculator, Calculator>();
-            Assert.Throws<ObjectAlreadyRegisteredException>(() => RegisterWithContainer<ICalculator, Calculator>(c));
+            _myContainer.Register<ICalculator, Calculator>();
+            Assert.Throws<ObjectAlreadyRegisteredException>(() => _myContainer.Register<ICalculator, Calculator>());
         }
 
-
-        private MyContainer RegisterWithContainer<I, T>(MyContainer c = null)
+        [Fact]
+        public void Register_SingleType_Succeeds()
         {
-            if (c == null)
-                c = new MyContainer();
-
-            c.Register<I, T>();
-            return c;
+            var c = new MyContainer();
+            c.Register<Calculator>();
         }
+
+        [Fact]
+        public void Register_WithLifeCycle_Succeeds()
+        {
+            _myContainer.Register<ICalculator, Calculator>(LifecycleType.Singleton);
+        }
+
+        [Fact]
+        public void Resolve_MissingType_ThrowsException()
+        {
+            Assert.Throws<MissingTypeException>(() => _myContainer.Resolve<ICalculator>());
+        }
+
     }
 }
