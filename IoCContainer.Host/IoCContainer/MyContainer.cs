@@ -51,11 +51,13 @@ namespace IoCContainer
                 throw new MissingTypeException($"The type {type} was not registered with the container");
 
             var c = registeredObject.ConcreteType.GetTypeInfo().DeclaredConstructors.FirstOrDefault();
-            var p = new object[0];
-            var instance = c.Invoke(p);
+            var parameterList = c.GetParameters();
+            var p = new List<object>();
+            var instance = c.Invoke(p.ToArray());
 
             return (T)instance;
         }
+
 
     }
 }
