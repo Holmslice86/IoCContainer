@@ -74,11 +74,31 @@ namespace IoCContainer.Tests
         }
 
         [Fact]
-        public void Resolve_MultiLevelDependency_Resolves_Instance()
+        public void Resolve_MultiLevelDependency_ResolvesInstance()
         {
+            _myContainer.Register<IEmailClient, EmailClient>();
             _myContainer.Register<IEmailService, EmailService>();
             var instance = _myContainer.Resolve<IEmailService>();
             Assert.NotNull(instance);
+        }
+
+        [Fact]
+        public void Resolve_NoInterfaceDependency_ResolvesInstance()
+        {
+            _myContainer.Register<Calculator>();
+            var instance = _myContainer.Resolve<Calculator>();
+            Assert.NotNull(instance);
+        }
+
+        [Fact]
+        public void Resolve_Singleton_ResolvesSingleInstance()
+        {
+            _myContainer.Register<IEmailClient, EmailClient>(LifecycleType.Singleton);
+            var singleton = _myContainer.Resolve<IEmailClient>();
+            singleton.IsSameInstance = true;
+
+            var singleton2 = _myContainer.Resolve<IEmailClient>();
+            Assert.True(singleton2.IsSameInstance);
         }
 
     }

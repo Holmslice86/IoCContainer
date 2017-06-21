@@ -12,5 +12,6 @@ namespace IoCContainer.Host.Models
             
         public IEmailClient Client { get; set; }
 
+     
     }
 }

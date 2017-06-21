@@ -39,25 +39,44 @@ namespace IoCContainer
             if (_container.Any(x => x.InterfaceType == typeof(I)))
                 throw new ObjectAlreadyRegisteredException($"Type {typeof(I)} has already been registered");
 
-            _container.Add(new RegisteredObject(interfaceType, concreteType, lifecycleType));
+            if (lifecycleType == LifecycleType.Transient)
+                _container.Add(new RegisteredObject(interfaceType, concreteType, lifecycleType));
+            if (lifecycleType == LifecycleType.Singleton)
+            {
+                var o = new RegisteredObject(interfaceType, concreteType, lifecycleType);
+                _container.Add(o);
+                o.SingletonInstance = Resolve<I>();
+            }
+
         }
 
+        
         public T Resolve<T>()
         {
-            var type = typeof(T);
+            return (T)Resolve(typeof(T));
+        }
 
+        public object Resolve(Type type)
+        {
             var registeredObject = _container.FirstOrDefault(x => x.InterfaceType == type);
             if (registeredObject == null)
                 throw new MissingTypeException($"The type {type} was not registered with the container");
+            if (registeredObject.SingletonInstance != null)
+                return registeredObject.SingletonInstance;
 
-            var c = registeredObject.ConcreteType.GetTypeInfo().DeclaredConstructors.FirstOrDefault();
-            var parameterList = c.GetParameters();
-            var p = new List<object>();
-            var instance = c.Invoke(p.ToArray());
+            var constructor = registeredObject.ConcreteType.GetTypeInfo().DeclaredConstructors.FirstOrDefault();
+            var parameterList = constructor.GetParameters();
+            var parameters = new List<object>();
 
-            return (T)instance;
+            foreach (var param in parameterList)
+            {
+                parameters.Add(Resolve(param.ParameterType));
+            }
+
+            var instance = constructor.Invoke(parameters.ToArray());
+
+            return instance;
         }
-
 
     }
 }

@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace IoCContainer.Host.Interfaces
+﻿namespace IoCContainer.Host.Interfaces
 {
     public interface IEmailClient
     {
+        bool IsSameInstance { get; set; }
     }
 }

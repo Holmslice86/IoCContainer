@@ -18,5 +18,6 @@ namespace IoCContainer
         public Type InterfaceType => _interfaceType;
         public Type ConcreteType => _concreteType;
         public LifecycleType LifecycleType => _lifecycleType;
+        public object SingletonInstance { get; set; }
     }
 }

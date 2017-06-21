@@ -1,13 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using IoCContainer.Host.Interfaces;
 using System.Web.Mvc;
 
 namespace IoCContainer.Host.Controllers
 {
     public class HomeController : Controller
     {
+
+        private ICalculator _calculator;
+        private IEmailService _emailService;
+
+        public HomeController(ICalculator calc, IEmailService email)
+        {
+            _calculator = calc;
+            _emailService = email;
+        }
+
         public ActionResult Index()
         {
             return View();
